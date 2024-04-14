@@ -1,4 +1,5 @@
 import pyodbc
+import Display_Video
 import datetime
 DRIVER_NAME = 'SQL SERVER'
 SERVER=f"localhost\\sqlexpress"
@@ -12,7 +13,6 @@ Trust Connection=yes;
 """
 def Add_Violence_Incidences(current_datetime,path):
     conn = pyodbc.connect(connection_string)
-
     SQL_QUERY = """
     INSERT INTO Violence_Incidences 
     VALUES (?, ?)
@@ -31,7 +31,7 @@ def Diplay_Violence_Incidences():
     records = cursor.fetchall()
     for r in records:
         print(f"{r.Id} {r.Date} {r.path}")
-
+        #Display_Video.Display_Video(r.path)
     cursor.close()
     conn.close()
-Diplay_Violence_Incidences()
+#Diplay_Violence_Incidences()
