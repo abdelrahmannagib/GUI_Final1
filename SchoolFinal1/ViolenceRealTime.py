@@ -94,6 +94,8 @@ def DetectYacta():
 
             # Clean up the mixer when finished
             pygame.mixer.quit()
+            Copy_Video.copy_video_to_folder(video_file_path,output_directory_vio,f"{current_datetime}.mp4",current_datetime)
+
         else:
             pygame.mixer.init()
             pygame.mixer.music.load("NonVio.mp3")
@@ -104,7 +106,6 @@ def DetectYacta():
 
             # Clean up the mixer when finished
             pygame.mixer.quit()
-            Copy_Video.copy_video_to_folder(video_file_path,output_directory_vio,f"{current_datetime}.mp4",current_datetime)
 
             #playsound('E:/كلية/iot/Testtt/20_3_Try/NonVio.wav')
 

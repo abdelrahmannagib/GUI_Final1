@@ -1,11 +1,13 @@
-from PySide6.QtGui import QAction
-from PySide6.QtWidgets import QMainWindow, QMenu, QMessageBox
-from ui_Final1 import Ui_MainWindow
 import cv2
-import numpy as np
+from PySide6.QtGui import QAction, QIcon
+from PySide6.QtWidgets import QMainWindow, QApplication,  QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QTableWidget, \
+    QTableWidgetItem, QRadioButton, QCheckBox, QLabel, QHeaderView, QSizePolicy
+# from PyQt6  QApplication,  QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QTableWidget, \
+#     QTableWidgetItem, QRadioButton
+from ui_Final2 import Ui_MainWindow
+from ViolenceRealTime import *
 from ViolenceRealTime import DetectYacta
-#from ViolenceRealTime import *
-from PySide6.QtCore import QThread
+from PySide6.QtCore import Qt
 
 class MySideBar(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -13,10 +15,8 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Smart School Management System")
 
-        # hide widget menu initially
-        self.icon_only_widget.setHidden(True)
-        # hide drop down initially
-        self.students_dropdown.setHidden(True)
+
+        self.icon_text_widget.setHidden(True)
 
         # connect buttons to switch different pages
         self.home_1.clicked.connect(self.switch_to_home)
@@ -25,29 +25,52 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.students_1.clicked.connect(self.switch_to_students)
         self.students_2.clicked.connect(self.switch_to_students)
 
-        self.student_information.clicked.connect(self.switch_to_studentsInformation)
-        self.student_payments.clicked.connect(self.switch_to_studentsPayments)
-        self.student_transactions.clicked.connect(self.switch_to_studentsTransactions)
-
-        # self.classMonitoring_1.clicked.connect(self.switch_to_classMonitoring)
-        # self.classMonitoring_2.clicked.connect(self.switch_to_classMonitoring)
+        self.classMonitoring_1.clicked.connect(self.switch_to_classMonitoring)
+        self.classMonitoring_2.clicked.connect(self.switch_to_classMonitoring)
 
         self.attendance_1.clicked.connect(self.switch_to_attendance)
         self.attendance_2.clicked.connect(self.switch_to_attendance)
 
         self.reports_1.clicked.connect(self.switch_to_reports)
         self.reports_2.clicked.connect(self.switch_to_reports)
+        # self.reports_2.clicked.connect(self.change_text)
 
-        # connect buttons to respective context menus
-        self.students_1.clicked.connect(self.students_context_menu)
+
+        # # connect buttons to respective context menus
+        # self.students_1.clicked.connect(self.students_context_menu)
 
         #open student dialog
         self.addStudent_button.clicked.connect(self.open_addStudent_dialog)
 
         #connect class monitoring button to its method
-        self.classMonitoring_1.clicked.connect(self.switch_to_classMonitoring)
-        # self.classMonitoring_2.clicked.connect(self.prepare_for_monitoring)
-        self.classMonitoring_2.clicked.connect(self.switch_to_classMonitoring)
+        # self.classMonitoring_1.clicked.connect(self.switch_to_classMonitoring)
+        # # self.classMonitoring_2.clicked.connect(self.prepare_for_monitoring)
+        # self.classMonitoring_2.clicked.connect(self.switch_to_classMonitoring)
+
+        # #display video button in reports page
+        # self.layout = QVBoxLayout()
+        # self.setLayout(self.layout)
+        #
+        # self.display_video_btn = QPushButton('&Display Video')
+        # self.layout.addWidget(self.display_video_btn)
+        #
+        # self.violence_reports_table = QTableWidget(3, 3)
+        # self.violence_reports_table.setStyleSheet("QAbstractItemView::inicator {width: 25px; height: 25px;}"
+        #                                           "QTableWidget:: item {width: 500px; height: 40px;}")
+        #
+        # self.layout.addWidget(self.violence_reports_table)
+        #
+        # for row in range (3):
+        #     for col in range(3):
+        #         if col % 3 == 0:
+        #             item = QTableWidgetItem('Item {0}-{1}'.format(row, col))
+        #             item.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
+        #             item.setCheckState(Qt.CheckState.Unchecked)
+        #             self.violence_reports_table.setItem(row, col, item)
+        #         else:
+        #             self.table.setItem(row, col, QTableWidgetItem('Item {0}-{1}'.format(row, col)))
+        #
+
 
         #set the default page to home
         self.switch_to_home()
@@ -59,6 +82,9 @@ class MySideBar(QMainWindow, Ui_MainWindow):
     #     self.video_thread = VideoThread()
     #     self.video_thread.start()
 
+    # def change_text(self):
+    #     self.reports_2.setText("Reports >")
+
     # methods to switch different pages
     def switch_to_home(self):
         self.stackedWidget.setCurrentIndex(0)
@@ -66,54 +92,65 @@ class MySideBar(QMainWindow, Ui_MainWindow):
     def switch_to_students(self):
         self.stackedWidget.setCurrentIndex(1)
 
-    def switch_to_studentsInformation(self):
-        self.stackedWidget.setCurrentIndex(2)
-
-    def switch_to_studentsPayments(self):
-        self.stackedWidget.setCurrentIndex(3)
-
-    def switch_to_studentsTransactions(self):
-        self.stackedWidget.setCurrentIndex(4)
 
     def switch_to_classMonitoring(self):
         DetectYacta()
-        self.stackedWidget.setCurrentIndex(5)
-        #DetectYacta()
-        # # Start capturing frames from the camera
-        # cap = cv2.VideoCapture(
-        #     0)  # Use 0 for the default camera, or specify the camera index if you have multiple cameras
-        #
-        # while True:
-        #     ret, frame = cap.read()  # Read a frame from the camera
-        #     if not ret:
-        #         print("Failed to capture frame.")
-        #         break
-        #
-        #     # Pass the frame to the predict_video function for violence detection
-        #     self.predict_video_frame(frame)
-        #
-        #     cv2.imshow('Live Video', frame)  # Display the live video feed
-        #
-        #     # Check for key press to exit the loop
-        #     if cv2.waitKey(1) & 0xFF == ord('q'):
-        #         break
-        #
-        # # Release the camera
-        # cap.release()
-        # cv2.destroyAllWindows()
-        #
-        # # Method to process a single frame for violence detection
-
-
-
-
+        self.stackedWidget.setCurrentIndex(2)
 
 
     def switch_to_attendance(self):
-        self.stackedWidget.setCurrentIndex(6)
+        self.stackedWidget.setCurrentIndex(3)
 
     def switch_to_reports(self):
-        self.stackedWidget.setCurrentIndex(7)
+        self.stackedWidget.setCurrentIndex(4)
+        # self.create_reports_page()
+        # self.violence_reoprts_table
+
+    # def create_reports_page(self):
+    #     # Create the layout for the reports page
+    #     reports_page_layout = QVBoxLayout()
+    #
+    #     # Page label
+    #     violence_reports_label = QLabel("Violence Reports")
+    #     violence_reports_label.setStyleSheet("font-size: 25px; color: #0e0d6a; font-weight: bold; padding-bottom: 30px;")
+    #     reports_page_layout.addWidget(violence_reports_label)
+    #
+    #     # Create the display video button and add it to the layout
+    #     display_video_btn = QPushButton('Display Video')
+    #     display_video_btn.setStyleSheet("background-color: #af8501; color: #ffffff; border-radius: 5px; border: none; "
+    #                                     "font-weight: bold; font-size: 12px; padding-left: 10px; padding-right: 10px;"
+    #                                     "width: 120px; height: 35px;")
+    #     display_video_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+    #     reports_page_layout.addWidget(display_video_btn)
+    #
+    #     # Create the table widget
+    #     violence_reports_table = QTableWidget(3, 3)
+    #     violence_reports_table.setStyleSheet("QAbstractItemView::indicator {width: 25px; height: 25px;}"
+    #                                          "QTableWidget::item {width: 500px; height: 40px;}")
+    #     violence_reports_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    #     violence_reports_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+    #     violence_reports_table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+    #
+    #     # Populate the table with items
+    #     for row in range(3):
+    #         # Create radio button for each row
+    #         radio_button = QRadioButton()
+    #         violence_reports_table.setCellWidget(row, 0, radio_button)
+    #         for col in range(1, 5):
+    #             item = QTableWidgetItem('Item {0}-{1}'.format(row, col))
+    #             violence_reports_table.setItem(row, col, item)
+    #
+    #     # Set header properties
+    #     header = violence_reports_table.horizontalHeader()
+    #     header.setStyleSheet("background-color: #0e0d6a; color: #ffffff; font-weight: bold;")
+    #     # Set column names
+    #     violence_reports_table.setHorizontalHeaderLabels(["", "ID", "Date", "", ""])
+    #
+    #     # Add the table widget to the layout
+    #     reports_page_layout.addWidget(violence_reports_table)
+    #
+    #     # Set the layout for the reports page
+    #     self.stackedWidget.widget(7).setLayout(reports_page_layout)  # Assuming index 7 is the reports page
 
     # methods to show context menus
     def students_context_menu(self):
@@ -174,82 +211,28 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
 
 
-    # def start_class_monitoring(self):
-    #     # Initialize the camera
-    #     cap = cv2.VideoCapture(0)
-    #
-    #     # Check if the camera opened successfully
-    #     if not cap.isOpened():
-    #         QMessageBox.critical(self, "Error", "Failed to open camera.")
-    #         return
-    #
-    #     try:
-    #         while True:
-    #             # Capture frame-by-frame
-    #             ret, frame = cap.read()
-    #
-    #             if not ret:
-    #                 QMessageBox.critical(self, "Error", "Failed to capture frame.")
-    #                 break
-    #
-    #             # Display the captured frame
-    #             cv2.imshow('Live Video', frame)
-    #
-    #             # Pass the frame to the class monitoring function
-    #             predict_video(frame)
-    #
-    #             # Break the loop if 'q' is pressed
-    #             if cv2.waitKey(1) & 0xFF == ord('q'):
-    #                 break
-    #
-    #     except Exception as e:
-    #         QMessageBox.critical(self, "Error", f"An error occurred: {str(e)}")
-    #
-    #     finally:
-    #         # Release the camera
-    #         cap.release()
-    #         # Close OpenCV windows
-    #         cv2.destroyAllWindows()
+# class DoubleButtonWidgetStudents(QWidget):
+#     def __init__(self, row_index, row_data):
+#         super().__init__()
+#
+#         #store the row index and row data as an instance in variables
+#         self.row_index = row_index
+#         self.row_data = row_data
+#
+#         #get student variables from the tuple
+#         self.student_name = self.row_data[0]
+#         self.student_id = self.row_data[1]
+#
+#         layout = QHBoxLayout(self)
+#
+#         #create display video button
+#         self.display_video_btn = QPushButton("", self)
+#         self.display_video_btn.setStyleSheet("background-color : #fec701")
+#         self.display_video_btn.setFixedSize(61, 31)
+#
+#         #set icon for the button
+#         icon = QIcon(":/Icons/ad-blocker (2).png")
+#         self.display_video_btn.setIcon(icon)
+#
+#         layout .addWidget(self.display_video_btn)
 
-
-
-# class VideoThread(QThread):
-#     def __init__(self, parent=None):
-#         super().__init__(parent)
-#
-#     def run(self):
-#         # Initialize the camera
-#         cap = cv2.VideoCapture(0)
-#
-#         # Check if the camera opened successfully
-#         if not cap.isOpened():
-#             QMessageBox.critical(None, "Error", "Failed to open camera.")
-#             return
-#
-#         try:
-#             while True:
-#                 # Capture frame-by-frame
-#                 ret, frame = cap.read()
-#
-#                 if not ret:
-#                     QMessageBox.critical(None, "Error", "Failed to capture frame.")
-#                     break
-#
-#                 # Display the captured frame
-#                 cv2.imshow('Live Video', frame)
-#
-#                 # Pass the frame to the class monitoring function
-#                 predict_video(frame)
-#
-#                 # Break the loop if 'q' is pressed
-#                 if cv2.waitKey(1) & 0xFF == ord('q'):
-#                     break
-#
-#         except Exception as e:
-#             QMessageBox.critical(None, "Error", f"An error occurred: {str(e)}")
-#
-#         finally:
-#             # Release the camera
-#             cap.release()
-#             # Close OpenCV windows
-#             cv2.destroyAllWindows()

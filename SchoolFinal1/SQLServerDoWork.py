@@ -34,4 +34,4 @@ def Diplay_Violence_Incidences():
         #Display_Video.Display_Video(r.path)
     cursor.close()
     conn.close()
-#Diplay_Violence_Incidences()
+Diplay_Violence_Incidences()
