@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QDialog,
     QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_StudentsDialog(QDialog):
-    def __init__(self,parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.resize(545, 584)
         self.setStyleSheet(u"QDialog{\n"
@@ -68,86 +68,29 @@ class Ui_StudentsDialog(QDialog):
         font.setBold(True)
         self.label.setFont(font)
         self.label.setStyleSheet(u"")
-        self.widget = QWidget(self)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(50, 450, 441, 60))
-        self.horizontalLayout_2 = QHBoxLayout(self.widget)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.uploadPhoto_Button = QPushButton(self.widget)
-        self.uploadPhoto_Button.setObjectName(u"uploadPhoto_Button")
-        self.uploadPhoto_Button.setMinimumSize(QSize(0, 30))
-        self.uploadPhoto_Button.setMaximumSize(QSize(16777215, 30))
-        self.uploadPhoto_Button.setStyleSheet(u"QPushButton{\n"
-"	background-color: rgb(1, 146, 239);\n"
-"	color: #ffffff;\n"
-"	border-radius: 5px;\n"
-"	border: none;\n"
-"	font-weight: bold;\n"
-"	font-size: 15px;\n"
-"}")
-
-        self.horizontalLayout_2.addWidget(self.uploadPhoto_Button)
-
-        self.takePhoto_Button = QPushButton(self.widget)
-        self.takePhoto_Button.setObjectName(u"takePhoto_Button")
-        self.takePhoto_Button.setMinimumSize(QSize(0, 30))
-        self.takePhoto_Button.setMaximumSize(QSize(16777215, 30))
-        self.takePhoto_Button.setStyleSheet(u"QPushButton{\n"
-"	background-color: rgb(1, 146, 239);\n"
-"	color: #ffffff;\n"
-"	border-radius: 5px;\n"
-"	border: none;\n"
-"	font-weight: bold;\n"
-"	font-size: 15px;\n"
-"}")
-
-        self.horizontalLayout_2.addWidget(self.takePhoto_Button)
-
         self.line = QFrame(self)
         self.line.setObjectName(u"line")
         self.line.setGeometry(QRect(0, 40, 551, 20))
         self.line.setFrameShape(QFrame.HLine)
         self.line.setFrameShadow(QFrame.Sunken)
-        self.widget1 = QWidget(self)
-        self.widget1.setObjectName(u"widget1")
-        self.widget1.setGeometry(QRect(20, 70, 511, 371))
-        self.verticalLayout_9 = QVBoxLayout(self.widget1)
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label_2 = QLabel(self.widget1)
-        self.label_2.setObjectName(u"label_2")
-        font1 = QFont()
-        font1.setPointSize(12)
-        self.label_2.setFont(font1)
-        self.label_2.setStyleSheet(u"")
-
-        self.verticalLayout.addWidget(self.label_2)
-
-        self.name_lineEdit = QLineEdit(self.widget1)
-        self.name_lineEdit.setObjectName(u"name_lineEdit")
-        self.name_lineEdit.setMinimumSize(QSize(0, 35))
-        self.name_lineEdit.setMaximumSize(QSize(16777215, 35))
-
-        self.verticalLayout.addWidget(self.name_lineEdit)
-
-
-        self.verticalLayout_9.addLayout(self.verticalLayout)
-
-        self.horizontalLayout = QHBoxLayout()
+        self.widget = QWidget(self)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(30, 210, 490, 59))
+        self.horizontalLayout = QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5 = QVBoxLayout()
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.label_6 = QLabel(self.widget1)
+        self.label_6 = QLabel(self.widget)
         self.label_6.setObjectName(u"label_6")
+        font1 = QFont()
+        font1.setPointSize(12)
         self.label_6.setFont(font1)
         self.label_6.setStyleSheet(u"")
 
         self.verticalLayout_5.addWidget(self.label_6)
 
-        self.gender_comboBox = QComboBox(self.widget1)
+        self.gender_comboBox = QComboBox(self.widget)
         self.gender_comboBox.addItem("")
         self.gender_comboBox.addItem("")
         self.gender_comboBox.setObjectName(u"gender_comboBox")
@@ -161,14 +104,14 @@ class Ui_StudentsDialog(QDialog):
 
         self.verticalLayout_6 = QVBoxLayout()
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.label_7 = QLabel(self.widget1)
+        self.label_7 = QLabel(self.widget)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setFont(font1)
         self.label_7.setStyleSheet(u"")
 
         self.verticalLayout_6.addWidget(self.label_7)
 
-        self.class_comboBox = QComboBox(self.widget1)
+        self.class_comboBox = QComboBox(self.widget)
         self.class_comboBox.addItem("")
         self.class_comboBox.addItem("")
         self.class_comboBox.addItem("")
@@ -194,14 +137,14 @@ class Ui_StudentsDialog(QDialog):
 
         self.verticalLayout_7 = QVBoxLayout()
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.label_8 = QLabel(self.widget1)
+        self.label_8 = QLabel(self.widget)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setFont(font1)
         self.label_8.setStyleSheet(u"")
 
         self.verticalLayout_7.addWidget(self.label_8)
 
-        self.dob_dateEdit = QDateEdit(self.widget1)
+        self.dob_dateEdit = QDateEdit(self.widget)
         self.dob_dateEdit.setObjectName(u"dob_dateEdit")
         self.dob_dateEdit.setMinimumSize(QSize(0, 30))
         self.dob_dateEdit.setMaximumSize(QSize(16777215, 30))
@@ -211,28 +154,12 @@ class Ui_StudentsDialog(QDialog):
 
         self.horizontalLayout.addLayout(self.verticalLayout_7)
 
-        self.verticalLayout_8 = QVBoxLayout()
+        self.widget1 = QWidget(self)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(30, 290, 491, 200))
+        self.verticalLayout_8 = QVBoxLayout(self.widget1)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.label_9 = QLabel(self.widget1)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font1)
-        self.label_9.setStyleSheet(u"")
-
-        self.verticalLayout_8.addWidget(self.label_9)
-
-        self.admission_dateEdit = QDateEdit(self.widget1)
-        self.admission_dateEdit.setObjectName(u"admission_dateEdit")
-        self.admission_dateEdit.setMinimumSize(QSize(0, 30))
-        self.admission_dateEdit.setMaximumSize(QSize(16777215, 30))
-
-        self.verticalLayout_8.addWidget(self.admission_dateEdit)
-
-
-        self.horizontalLayout.addLayout(self.verticalLayout_8)
-
-
-        self.verticalLayout_9.addLayout(self.horizontalLayout)
-
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_4 = QVBoxLayout()
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.label_5 = QLabel(self.widget1)
@@ -250,7 +177,7 @@ class Ui_StudentsDialog(QDialog):
         self.verticalLayout_4.addWidget(self.address_lineEdit)
 
 
-        self.verticalLayout_9.addLayout(self.verticalLayout_4)
+        self.verticalLayout_8.addLayout(self.verticalLayout_4)
 
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -268,7 +195,7 @@ class Ui_StudentsDialog(QDialog):
         self.verticalLayout_2.addWidget(self.phone_lineEdit)
 
 
-        self.verticalLayout_9.addLayout(self.verticalLayout_2)
+        self.verticalLayout_8.addLayout(self.verticalLayout_2)
 
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -286,11 +213,11 @@ class Ui_StudentsDialog(QDialog):
         self.verticalLayout_3.addWidget(self.email_lineEdit)
 
 
-        self.verticalLayout_9.addLayout(self.verticalLayout_3)
+        self.verticalLayout_8.addLayout(self.verticalLayout_3)
 
         self.widget2 = QWidget(self)
         self.widget2.setObjectName(u"widget2")
-        self.widget2.setGeometry(QRect(320, 520, 211, 37))
+        self.widget2.setGeometry(QRect(140, 510, 271, 37))
         self.horizontalLayout_3 = QHBoxLayout(self.widget2)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -324,6 +251,66 @@ class Ui_StudentsDialog(QDialog):
 
         self.horizontalLayout_3.addWidget(self.cancel_Button)
 
+        self.widget3 = QWidget(self)
+        self.widget3.setObjectName(u"widget3")
+        self.widget3.setGeometry(QRect(290, 140, 231, 62))
+        self.verticalLayout_10 = QVBoxLayout(self.widget3)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.label_11 = QLabel(self.widget3)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setFont(font1)
+        self.label_11.setStyleSheet(u"")
+
+        self.verticalLayout_10.addWidget(self.label_11)
+
+        self.name_lineEdit_3 = QLineEdit(self.widget3)
+        self.name_lineEdit_3.setObjectName(u"name_lineEdit_3")
+        self.name_lineEdit_3.setMinimumSize(QSize(0, 35))
+        self.name_lineEdit_3.setMaximumSize(QSize(16777215, 35))
+
+        self.verticalLayout_10.addWidget(self.name_lineEdit_3)
+
+        self.widget4 = QWidget(self)
+        self.widget4.setObjectName(u"widget4")
+        self.widget4.setGeometry(QRect(30, 140, 201, 62))
+        self.verticalLayout_9 = QVBoxLayout(self.widget4)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.label_10 = QLabel(self.widget4)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setFont(font1)
+        self.label_10.setStyleSheet(u"")
+
+        self.verticalLayout_9.addWidget(self.label_10)
+
+        self.name_lineEdit_2 = QLineEdit(self.widget4)
+        self.name_lineEdit_2.setObjectName(u"name_lineEdit_2")
+        self.name_lineEdit_2.setMinimumSize(QSize(0, 35))
+        self.name_lineEdit_2.setMaximumSize(QSize(16777215, 35))
+
+        self.verticalLayout_9.addWidget(self.name_lineEdit_2)
+
+        self.widget5 = QWidget(self)
+        self.widget5.setObjectName(u"widget5")
+        self.widget5.setGeometry(QRect(30, 70, 491, 62))
+        self.verticalLayout = QVBoxLayout(self.widget5)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label_2 = QLabel(self.widget5)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setFont(font1)
+        self.label_2.setStyleSheet(u"")
+
+        self.verticalLayout.addWidget(self.label_2)
+
+        self.name_lineEdit = QLineEdit(self.widget5)
+        self.name_lineEdit.setObjectName(u"name_lineEdit")
+        self.name_lineEdit.setMinimumSize(QSize(0, 35))
+        self.name_lineEdit.setMaximumSize(QSize(16777215, 35))
+
+        self.verticalLayout.addWidget(self.name_lineEdit)
+
 
         self.retranslateUi(self)
 
@@ -333,9 +320,6 @@ class Ui_StudentsDialog(QDialog):
     def retranslateUi(self, StudentsDialog):
         StudentsDialog.setWindowTitle(QCoreApplication.translate("StudentsDialog", u"Dialog", None))
         self.label.setText(QCoreApplication.translate("StudentsDialog", u"Add New Student", None))
-        self.uploadPhoto_Button.setText(QCoreApplication.translate("StudentsDialog", u"Upload Photo", None))
-        self.takePhoto_Button.setText(QCoreApplication.translate("StudentsDialog", u"Take Photo", None))
-        self.label_2.setText(QCoreApplication.translate("StudentsDialog", u"Full Name", None))
         self.label_6.setText(QCoreApplication.translate("StudentsDialog", u"Gender", None))
         self.gender_comboBox.setItemText(0, QCoreApplication.translate("StudentsDialog", u"Male", None))
         self.gender_comboBox.setItemText(1, QCoreApplication.translate("StudentsDialog", u"Female", None))
@@ -357,11 +341,13 @@ class Ui_StudentsDialog(QDialog):
         self.class_comboBox.setItemText(13, QCoreApplication.translate("StudentsDialog", u"Grade 12", None))
 
         self.label_8.setText(QCoreApplication.translate("StudentsDialog", u"Date Of Birth", None))
-        self.label_9.setText(QCoreApplication.translate("StudentsDialog", u"Admission Date", None))
         self.label_5.setText(QCoreApplication.translate("StudentsDialog", u"Address", None))
         self.label_3.setText(QCoreApplication.translate("StudentsDialog", u"Phone Number", None))
         self.label_4.setText(QCoreApplication.translate("StudentsDialog", u"Email ", None))
         self.saveStudent_Button.setText(QCoreApplication.translate("StudentsDialog", u"Add Student", None))
         self.cancel_Button.setText(QCoreApplication.translate("StudentsDialog", u"Cancel", None))
+        self.label_11.setText(QCoreApplication.translate("StudentsDialog", u"Age", None))
+        self.label_10.setText(QCoreApplication.translate("StudentsDialog", u"Student ID", None))
+        self.label_2.setText(QCoreApplication.translate("StudentsDialog", u"Full Name", None))
     # retranslateUi
 

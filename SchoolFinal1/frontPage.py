@@ -169,13 +169,13 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         for row, student in enumerate(students):
             self.studentInfo_table.setItem(row, 0, QTableWidgetItem(str(student[1])))
             self.studentInfo_table.setItem(row, 1, QTableWidgetItem(str(student[0])))
-            self.studentInfo_table.setItem(row, 2, QTableWidgetItem(student[2]))
-            self.studentInfo_table.setItem(row, 3, QTableWidgetItem(student[3]))
-            self.studentInfo_table.setItem(row, 4, QTableWidgetItem(student[4]))
+            self.studentInfo_table.setItem(row, 2, QTableWidgetItem(str(student[2])))
+            self.studentInfo_table.setItem(row, 3, QTableWidgetItem(str(student[3])))
+            self.studentInfo_table.setItem(row, 4, QTableWidgetItem(str(student[4])))
             self.studentInfo_table.setItem(row, 5, QTableWidgetItem(str(student[5])))
-            self.studentInfo_table.setItem(row, 6, QTableWidgetItem(student[6]))
-            self.studentInfo_table.setItem(row, 7, QTableWidgetItem(student[7]))
-            self.studentInfo_table.setItem(row, 8, QTableWidgetItem(student[8]))
+            self.studentInfo_table.setItem(row, 6, QTableWidgetItem(str(student[6])))
+            self.studentInfo_table.setItem(row, 7, QTableWidgetItem(str(student[7])))
+            self.studentInfo_table.setItem(row, 8, QTableWidgetItem(str(student[8])))
 
             # Add buttons for update and delete
             #update_button = QPushButton("Update")
@@ -313,8 +313,11 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         address = addStudent_dialog.address_lineEdit.text()
         phone = addStudent_dialog.phone_lineEdit.text()
         email = addStudent_dialog.email_lineEdit.text()
-        print(dob)
+        id=addStudent_dialog.name_lineEdit_2.text()
+        Age=addStudent_dialog.name_lineEdit_3.text()
+        #print(dob)
         #print(f"Email: {email}")
         #print(gender)
         import SQLServerDoWork
-        SQLServerDoWork.AddStudent("Id", name, gender, class_, dob,"Age" , address, phone, email)
+        SQLServerDoWork.AddStudent(id, name, gender, class_, dob,Age, address, phone, email)
+        self.loadData()

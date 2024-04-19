@@ -114,7 +114,8 @@ def AddStudent(id,name,gender,stClass,DOB,Age,Addr,Phone,email):
        """
 
     cursor = conn.cursor()
-    cursor.execute(SQL_QUERY, (id, name,gender,stClass,DOB,Age,Addr,Phone,email))
+    #print(id)
+    cursor.execute(SQL_QUERY, (int(id), name,gender,stClass,DOB,int(Age),Addr,Phone,email))
     conn.commit()
     cursor.close()
 
