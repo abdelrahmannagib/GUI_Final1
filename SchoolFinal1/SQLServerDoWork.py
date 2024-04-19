@@ -29,9 +29,110 @@ def Diplay_Violence_Incidences():
     cursor = conn.cursor()
     cursor.execute(SQL_QUERY)
     records = cursor.fetchall()
+    x=[]
     for r in records:
-        print(f"{r.Id} {r.Date} {r.path}")
+        #print("ds")
+        x.append((r.Id, r.Date, r.path))
+        #print(f"{r.Id} {r.Date} {r.path}")
         #Display_Video.Display_Video(r.path)
     cursor.close()
     conn.close()
-Diplay_Violence_Incidences()
+    return x
+# r=Diplay_Violence_Incidences()
+# for x in r:
+#     print(x[1])
+
+def showStudeentStatus(date):
+    conn = pyodbc.connect(connection_string)
+    SQL_QUERY = """
+        SELECT s.id,s.name, sa.date,s.StClass
+        FROM Students AS s
+        LEFT JOIN Student_Attendance AS sa ON sa.id = s.id AND CAST(sa.date AS DATE) = ?
+        ORDER BY s.id;
+        """
+    cursor = conn.cursor()
+    cursor.execute(SQL_QUERY, (date,))
+    records = cursor.fetchall()
+    x = []
+    for r in records:
+        x.append((r.id,r.name, r.date,r.StClass))
+    cursor.close()
+    conn.close()
+    return x
+
+
+# z=showStudeentStatus("2024-04-14")
+# for var in z:
+#     print(var[0],var[1],var[2],var[3])
+
+def showStudeentStatusWithoutDate():
+    conn = pyodbc.connect(connection_string)
+    SQL_QUERY = """
+        SELECT s.id,s.name, sa.date,s.StClass
+        FROM Students AS s
+        inner JOIN Student_Attendance AS sa ON sa.id = s.id 
+        ORDER BY s.id;
+        """
+    cursor = conn.cursor()
+    cursor.execute(SQL_QUERY)
+    records = cursor.fetchall()
+    x = []
+    for r in records:
+        x.append((r.id,r.name, r.date,r.StClass))
+    cursor.close()
+    conn.close()
+    return x
+
+
+def diplayAllStudents():
+    conn = pyodbc.connect(connection_string)
+    SQL_QUERY = "select * from Students "
+    cursor = conn.cursor()
+    cursor.execute(SQL_QUERY)
+    records = cursor.fetchall()
+    x = []
+    for r in records:
+        # print("ds")
+        x.append((r.id, r.name, r.Gender,r.StClass,r.Birthdate,r.Age,r.Address,r.phone,r.email))
+        # print(f"{r.Id} {r.Date} {r.path}")
+        # Display_Video.Display_Video(r.path)
+    cursor.close()
+    conn.close()
+    return x
+
+
+# z=diplayAllStudents()
+# for var in z:
+#     print(var[0],var[1],var[2],var[3],var[4])
+
+
+def AddStudent(id,name,gender,stClass,DOB,Age,Addr,Phone,email):
+    conn = pyodbc.connect(connection_string)
+    SQL_QUERY = """
+       INSERT INTO Students 
+       VALUES (?,?,? ,?,?,? ,?,?,?)
+       """
+
+    cursor = conn.cursor()
+    cursor.execute(SQL_QUERY, (id, name,gender,stClass,DOB,Age,Addr,Phone,email))
+    conn.commit()
+    cursor.close()
+
+def AddStudentAttendance(ids,times):
+    conn = pyodbc.connect(connection_string)
+    SQL_QUERY = """
+       INSERT INTO Student_Attendance 
+       VALUES (?, ?)
+       """
+
+    cursor = conn.cursor()
+
+    for id,time in zip(ids,times):
+        cursor.execute(SQL_QUERY, (int(id), time))
+        #print(f"id {int(id)} Time{time}")
+    conn.commit()
+    cursor.close()
+
+#AddStudent(223,"name","gender","stClass","4/18/2024",5,"Addr","Phone","email")
+
+diplayAllStudents()

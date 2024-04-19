@@ -1,9 +1,11 @@
 <RCC>
   <qresource>
-    <file>Icons/add-friend2.png</file>
+    <file>Icons/ad-blocker (1).png</file>
+    <file>Icons/ad-blocker (2).png</file>
+    <file>Icons/ad-blocker.png</file>
     <file>Icons/add-friend.png</file>
-    <file>Icons/Group 2 (2).png</file>
-    <file>Icons/Group 2.png</file>
+    <file>Icons/add-friend2.png</file>
+    <file>Icons/bar-chart.png</file>
     <file>Icons/bell (1).png</file>
     <file>Icons/bell (2).png</file>
     <file>Icons/bell (3).png</file>
@@ -34,6 +36,9 @@
     <file>Icons/calendar (8).png</file>
     <file>Icons/calendar (9).png</file>
     <file>Icons/calendar.png</file>
+    <file>Icons/calEvent (1).png</file>
+    <file>Icons/calEvent (2).png</file>
+    <file>Icons/calEvent (3).png</file>
     <file>Icons/classroom (1).png</file>
     <file>Icons/classroom (2).png</file>
     <file>Icons/classroom (3).png</file>
@@ -64,6 +69,10 @@
     <file>Icons/email (8).png</file>
     <file>Icons/email (9).png</file>
     <file>Icons/email.png</file>
+    <file>Icons/event (1).png</file>
+    <file>Icons/event (2).png</file>
+    <file>Icons/event (3).png</file>
+    <file>Icons/event.png</file>
     <file>Icons/Frame 1.png</file>
     <file>Icons/Frame 2.png</file>
     <file>Icons/Frame 3.png</file>
@@ -94,6 +103,10 @@
     <file>Icons/magnifying-glass (8).png</file>
     <file>Icons/magnifying-glass (9).png</file>
     <file>Icons/magnifying-glass.png</file>
+    <file>Icons/multiple-users-silhouette.png</file>
+    <file>Icons/pen (1).png</file>
+    <file>Icons/pen (2).png</file>
+    <file>Icons/pen.png</file>
     <file>Icons/report (1).png</file>
     <file>Icons/report (2).png</file>
     <file>Icons/report (3).png</file>
@@ -116,6 +129,13 @@
     <file>Icons/school (9).png</file>
     <file>Icons/school.png</file>
     <file>Icons/Untitled (1).jpg</file>
+    <file>Icons/Untitled design.png</file>
+    <file>Icons/Untitled design2.png</file>
+    <file>Icons/Untitled design3.png</file>
+    <file>Icons/Untitled design4.jpg</file>
+    <file>Icons/Untitled design5.png</file>
+    <file>Icons/Untitled design6.png</file>
+    <file>Icons/Untitled design7.png</file>
     <file>Icons/Untitled.jpg</file>
     <file>Icons/user (1).png</file>
     <file>Icons/user (2).png</file>

@@ -1,16 +1,13 @@
+from tensorflow.keras.models import load_model
+
+
 def DetectYacta():
     import pygame
-    import tensorflow as tf
     import cv2
     import numpy as np
     import time
     import datetime
-    from tensorflow.keras.models import load_model
-    import sys
-    from pydub import AudioSegment
-    from pydub.playback import play
     import numpy as np
-    import h5py
     import os
     import Copy_Video
     # Specify the height and width to which each video frame will be resized in our dataset.
@@ -141,8 +138,8 @@ def DetectYacta():
             # Create VideoWriter object for the current 5-second interval
             out = cv2.VideoWriter(output_filename, fourcc, 20.0, (640, 480))  # Adjust width and height if needed
 
-            # Capture and write frames for 5 seconds
-            while (time.time() - start_time) < 5:
+            # Capture and write frames for 3 seconds
+            while (time.time() - start_time) < 3:
                 ret, frame = cap.read()
 
                 if not ret:
@@ -171,12 +168,6 @@ def DetectYacta():
     except KeyboardInterrupt:
         # Release the camera if the user interrupts the program
         cap.release()
-
-
-
-
-
-
 
 
 

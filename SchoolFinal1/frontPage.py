@@ -1,20 +1,110 @@
 import cv2
 from PySide6.QtGui import QAction, QIcon
-from PySide6.QtWidgets import QMainWindow, QApplication,  QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QTableWidget, \
-    QTableWidgetItem, QRadioButton, QCheckBox, QLabel, QHeaderView, QSizePolicy
+from PySide6.QtWidgets import QMainWindow, QApplication, QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, \
+    QTableWidget, \
+    QTableWidgetItem, QRadioButton, QCheckBox, QLabel, QHeaderView, QSizePolicy, QScrollArea, QStyledItemDelegate
 # from PyQt6  QApplication,  QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QTableWidget, \
 #     QTableWidgetItem, QRadioButton
-from ui_Final2 import Ui_MainWindow
+from ui_Final5 import Ui_MainWindow
 from ViolenceRealTime import *
 from ViolenceRealTime import DetectYacta
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QSize
+from Display_Video import Display_Video
+from StudentDialog import Ui_StudentsDialog
+
+
+class ActionsWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+        # Set initial size of the main window
+        layout = QHBoxLayout()
+        self.update_button = QPushButton("")
+        self.delete_button = QPushButton("")
+        layout.addWidget(self.update_button)
+        layout.addWidget(self.delete_button)
+        layout.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(layout)
+
+        # Apply styling
+        self.update_button.setStyleSheet(
+            "QPushButton {"
+            "   background-color: #01e3b0;"
+            "   border: none;"
+            "   border-radius: 5px"
+            "   color: #0e0d6a;"
+            "   padding: 8px 12px;"
+            "   text-align: center;"
+            "   text-decoration: none;"
+            "   display: inline-block;"
+            "   font-size: 12px;"
+            "   margin: 2px 2px;"
+            "   cursor: pointer;"
+            "}"
+            # "QPushButton:hover {background-color: #45a049;}"
+            # "QPushButton:pressed {background-color: #3e8e41;}"
+        )
+
+        self.delete_button.setStyleSheet(
+            "QPushButton {"
+            "   background-color: #fe4f51;"
+            "   border: none;"
+            "   border-radius: 5px"
+            "   color: #0e0d6a;"
+            "   padding: 8px 12px;"
+            "   text-align: center;"
+            "   text-decoration: none;"
+            "   display: inline-block;"
+            "   font-size: 12px;"
+            "   margin: 2px 2px;"
+            "   cursor: pointer;"
+            "}"
+            # "QPushButton:hover {background-color: #45a049;}"
+            # "QPushButton:pressed {background-color: #3e8e41;}"
+        )
+
+        # Adjust button sizes
+        # self.update_button.setFixedSize(30, 30)
+        # self.delete_button.setFixedSize(30, 30)
+
+        # Set icon for update button and adjust size
+        update_icon = QIcon("SchoolFinal1/Icons/pen.png")  # Path to update icon image
+        update_icon_actual_size = update_icon.actualSize(QSize(20, 20))  # Adjust size as needed
+        self.update_button.setIcon(update_icon)
+        self.update_button.setIconSize(update_icon_actual_size)
+
+        # Set icon for delete button and adjust size
+        delete_icon = QIcon("SchoolFinal1/Icons/trash.png")  # Path to delete icon image
+        delete_icon_actual_size = delete_icon.actualSize(QSize(20, 20))  # Adjust size as needed
+        self.delete_button.setIcon(delete_icon)
+        self.delete_button.setIconSize(delete_icon_actual_size)
+
+        # Set fixed size for buttons
+        self.update_button.setFixedSize(30, 30)
+        self.delete_button.setFixedSize(30, 30)
+
+        # # Create a scroll area
+        # scroll_area = QScrollArea()
+        # scroll_area.setWidgetResizable(True)
+        #
+        # # Create a widget to hold the stacked widget
+        # stacked_widget_container = QWidget()
+        # scroll_area.setWidget(stacked_widget_container)
+        #
+        # # Create a layout for the stacked widget container
+        # stacked_layout = QVBoxLayout(stacked_widget_container)
+        #
+        # # Add the stacked widget to the container widget
+        # stacked_widget_container.setLayout(stacked_layout)
+        #
+        # # Add the scroll area to the central widget
+        # self.setCentralWidget(scroll_area)
+
 
 class MySideBar(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("Smart School Management System")
-
 
         self.icon_text_widget.setHidden(True)
 
@@ -28,62 +118,108 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         self.classMonitoring_1.clicked.connect(self.switch_to_classMonitoring)
         self.classMonitoring_2.clicked.connect(self.switch_to_classMonitoring)
 
+        self.attendance_monitoring_1.clicked.connect(self.switch_to_attendanceMonitoring)
+        self.attendance_monitoring_2.clicked.connect(self.switch_to_attendanceMonitoring)
+
         self.attendance_1.clicked.connect(self.switch_to_attendance)
+        self.dateEdit.dateChanged.connect(self.filterTableByDateAttendance)
         self.attendance_2.clicked.connect(self.switch_to_attendance)
 
         self.reports_1.clicked.connect(self.switch_to_reports)
         self.reports_2.clicked.connect(self.switch_to_reports)
-        # self.reports_2.clicked.connect(self.change_text)
 
+        # self.reports_2.clicked.connect(self.change_text)
 
         # # connect buttons to respective context menus
         # self.students_1.clicked.connect(self.students_context_menu)
 
-        #open student dialog
+        # open student dialog
         self.addStudent_button.clicked.connect(self.open_addStudent_dialog)
 
-        #connect class monitoring button to its method
-        # self.classMonitoring_1.clicked.connect(self.switch_to_classMonitoring)
-        # # self.classMonitoring_2.clicked.connect(self.prepare_for_monitoring)
-        # self.classMonitoring_2.clicked.connect(self.switch_to_classMonitoring)
 
-        # #display video button in reports page
-        # self.layout = QVBoxLayout()
-        # self.setLayout(self.layout)
-        #
-        # self.display_video_btn = QPushButton('&Display Video')
-        # self.layout.addWidget(self.display_video_btn)
-        #
-        # self.violence_reports_table = QTableWidget(3, 3)
-        # self.violence_reports_table.setStyleSheet("QAbstractItemView::inicator {width: 25px; height: 25px;}"
-        #                                           "QTableWidget:: item {width: 500px; height: 40px;}")
-        #
-        # self.layout.addWidget(self.violence_reports_table)
-        #
-        # for row in range (3):
-        #     for col in range(3):
-        #         if col % 3 == 0:
-        #             item = QTableWidgetItem('Item {0}-{1}'.format(row, col))
-        #             item.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled)
-        #             item.setCheckState(Qt.CheckState.Unchecked)
-        #             self.violence_reports_table.setItem(row, col, item)
-        #         else:
-        #             self.table.setItem(row, col, QTableWidgetItem('Item {0}-{1}'.format(row, col)))
-        #
+        # display_video button
+        self.addStudent_button_2.clicked.connect(self.display_video)
 
 
-        #set the default page to home
+        # # Connect loadData function to show students page
+        # self.stackedWidget.currentChanged.connect(self.on_page_changed)
+
+        # set the default page to home
         self.switch_to_home()
 
-    # def prepare_for_monitoring(self):
-    #     # You can add any preparation steps here before starting the monitoring
-    #     self.switch_to_classMonitoring()
-    #     # Start the monitoring in a separate thread
-    #     self.video_thread = VideoThread()
-    #     self.video_thread.start()
 
-    # def change_text(self):
-    #     self.reports_2.setText("Reports >")
+
+    def display_video(self):
+        if self.selected_video_path:
+            Display_Video(self.selected_video_path)
+        else:
+            print("Please select a video to display.")
+
+    def loadData(self):
+        import SQLServerDoWork
+        students =SQLServerDoWork.diplayAllStudents()
+
+        # Clear existing data
+        self.studentInfo_table.clearContents()
+
+        # Set the number of rows in the table to match the number of students
+        self.studentInfo_table.setRowCount(len(students))
+
+        # Populate the table with student information
+        for row, student in enumerate(students):
+            self.studentInfo_table.setItem(row, 0, QTableWidgetItem(str(student[1])))
+            self.studentInfo_table.setItem(row, 1, QTableWidgetItem(str(student[0])))
+            self.studentInfo_table.setItem(row, 2, QTableWidgetItem(student[2]))
+            self.studentInfo_table.setItem(row, 3, QTableWidgetItem(student[3]))
+            self.studentInfo_table.setItem(row, 4, QTableWidgetItem(student[4]))
+            self.studentInfo_table.setItem(row, 5, QTableWidgetItem(str(student[5])))
+            self.studentInfo_table.setItem(row, 6, QTableWidgetItem(student[6]))
+            self.studentInfo_table.setItem(row, 7, QTableWidgetItem(student[7]))
+            self.studentInfo_table.setItem(row, 8, QTableWidgetItem(student[8]))
+
+            # Add buttons for update and delete
+            #update_button = QPushButton("Update")
+            #delete_button = QPushButton("Delete")
+
+            # # Set the buttons in the last column of each row
+            # self.studentInfo_table.setCellWidget(row, 9, update_button)
+            # self.studentInfo_table.setCellWidget(row, 10, delete_button)
+            # Add update and delete buttons
+            actions_widget = ActionsWidget()
+            self.studentInfo_table.setCellWidget(row, 9, actions_widget)
+
+    def loadDataViolence(self):
+        import SQLServerDoWork
+        violence_videos =SQLServerDoWork.Diplay_Violence_Incidences()
+
+        # Clear existing data
+        self.violence_reoprts_table.clearContents()
+
+        # Set the number of rows in the table to match the number of students
+        self.violence_reoprts_table.setRowCount(len(violence_videos))
+        self.violence_reoprts_table.setColumnCount(3)
+
+        self.selected_video_path = None
+
+        # Populate the table with student information
+        for row, video in enumerate(violence_videos):
+            self.violence_reoprts_table.setItem(row, 0, QTableWidgetItem(str(video[0])))
+            self.violence_reoprts_table.setItem(row, 1, QTableWidgetItem(str(video[1])))
+
+            # Create radio button for each row
+            radio_button = QRadioButton()
+            self.violence_reoprts_table.setCellWidget(row, 2, radio_button)
+            radio_button = QRadioButton()
+            radio_button.clicked.connect(lambda _, path=video[2]: self.set_selected_video(path))
+            self.violence_reoprts_table.setCellWidget(row, 2, radio_button)
+
+            # # Set the buttons in the last column of each row
+            # self.studentInfo_table.setCellWidget(row, 9, update_button)
+            # self.studentInfo_table.setCellWidget(row, 10, delete_button)
+            # Add update and delete buttons
+
+    def set_selected_video(self, video_path):
+        self.selected_video_path = video_path
 
     # methods to switch different pages
     def switch_to_home(self):
@@ -91,148 +227,94 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
     def switch_to_students(self):
         self.stackedWidget.setCurrentIndex(1)
-
+        # Load data when switching to students page
+        self.loadData()
 
     def switch_to_classMonitoring(self):
         DetectYacta()
         self.stackedWidget.setCurrentIndex(2)
 
+    def loadDataAttendanceDeafult(self):
+        import SQLServerDoWork
+        attendance_Deafult_Date =SQLServerDoWork.showStudeentStatusWithoutDate()
+
+        # Clear existing data
+        self.studentInfo_table_2.clearContents()
+
+        # Set the number of rows in the table to match the number of students
+        self.studentInfo_table_2.setRowCount(len(attendance_Deafult_Date))
+        self.studentInfo_table_2.setColumnCount(4)
+
+        #self.selected_video_path = None
+
+        # Populate the table with student information
+        for row, video in enumerate(attendance_Deafult_Date):
+            #s.id,s.name, sa.date,s.StClass
+            self.studentInfo_table_2.setItem(row, 0, QTableWidgetItem(str(video[0])))
+            self.studentInfo_table_2.setItem(row, 1, QTableWidgetItem(str(video[1])))
+            self.studentInfo_table_2.setItem(row, 2, QTableWidgetItem(str(video[2])))
+            self.studentInfo_table_2.setItem(row, 3, QTableWidgetItem(str(video[3])))
+            #self.studentInfo_table_2.setItem(row, 4, QTableWidgetItem(str("hi")))
+
+    def filterTableByDateAttendance(self, selected_date):
+        selected_date_str = selected_date.toString("MM/dd/yyyy")  # Convert QDate to string format
+        import SQLServerDoWork
+        attendance_Deafult_Date = SQLServerDoWork.showStudeentStatus(selected_date_str)
+
+        # Clear existing data
+        self.studentInfo_table_2.clearContents()
+
+        # Set the number of rows in the table to match the number of students
+        self.studentInfo_table_2.setRowCount(len(attendance_Deafult_Date))
+        self.studentInfo_table_2.setColumnCount(4)
+
+        # self.selected_video_path = None
+
+        # Populate the table with student information
+        for row, video in enumerate(attendance_Deafult_Date):
+            # s.id,s.name, sa.date,s.StClass
+            self.studentInfo_table_2.setItem(row, 0, QTableWidgetItem(str(video[0])))
+            self.studentInfo_table_2.setItem(row, 1, QTableWidgetItem(str(video[1])))
+            self.studentInfo_table_2.setItem(row, 2, QTableWidgetItem(str(video[2])))
+            self.studentInfo_table_2.setItem(row, 3, QTableWidgetItem(str(video[3])))
+
+    def switch_to_attendanceMonitoring(self):
+        self.stackedWidget.setCurrentIndex(3)
+        import RealTime
+        RealTime.FaceYacta()
 
     def switch_to_attendance(self):
-        self.stackedWidget.setCurrentIndex(3)
+        self.loadDataAttendanceDeafult()
+        self.stackedWidget.setCurrentIndex(4)
 
     def switch_to_reports(self):
-        self.stackedWidget.setCurrentIndex(4)
-        # self.create_reports_page()
-        # self.violence_reoprts_table
+        self.stackedWidget.setCurrentIndex(5)
+        self.loadDataViolence()
 
-    # def create_reports_page(self):
-    #     # Create the layout for the reports page
-    #     reports_page_layout = QVBoxLayout()
-    #
-    #     # Page label
-    #     violence_reports_label = QLabel("Violence Reports")
-    #     violence_reports_label.setStyleSheet("font-size: 25px; color: #0e0d6a; font-weight: bold; padding-bottom: 30px;")
-    #     reports_page_layout.addWidget(violence_reports_label)
-    #
-    #     # Create the display video button and add it to the layout
-    #     display_video_btn = QPushButton('Display Video')
-    #     display_video_btn.setStyleSheet("background-color: #af8501; color: #ffffff; border-radius: 5px; border: none; "
-    #                                     "font-weight: bold; font-size: 12px; padding-left: 10px; padding-right: 10px;"
-    #                                     "width: 120px; height: 35px;")
-    #     display_video_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-    #     reports_page_layout.addWidget(display_video_btn)
-    #
-    #     # Create the table widget
-    #     violence_reports_table = QTableWidget(3, 3)
-    #     violence_reports_table.setStyleSheet("QAbstractItemView::indicator {width: 25px; height: 25px;}"
-    #                                          "QTableWidget::item {width: 500px; height: 40px;}")
-    #     violence_reports_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-    #     violence_reports_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-    #     violence_reports_table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-    #
-    #     # Populate the table with items
-    #     for row in range(3):
-    #         # Create radio button for each row
-    #         radio_button = QRadioButton()
-    #         violence_reports_table.setCellWidget(row, 0, radio_button)
-    #         for col in range(1, 5):
-    #             item = QTableWidgetItem('Item {0}-{1}'.format(row, col))
-    #             violence_reports_table.setItem(row, col, item)
-    #
-    #     # Set header properties
-    #     header = violence_reports_table.horizontalHeader()
-    #     header.setStyleSheet("background-color: #0e0d6a; color: #ffffff; font-weight: bold;")
-    #     # Set column names
-    #     violence_reports_table.setHorizontalHeaderLabels(["", "ID", "Date", "", ""])
-    #
-    #     # Add the table widget to the layout
-    #     reports_page_layout.addWidget(violence_reports_table)
-    #
-    #     # Set the layout for the reports page
-    #     self.stackedWidget.widget(7).setLayout(reports_page_layout)  # Assuming index 7 is the reports page
+        # Open dialog for inserting new students
 
-    # methods to show context menus
-    def students_context_menu(self):
-        self.show_custom_context_menu(self.students_1,
-                                      ["Students Information", "Students Payments",
-                                       "Students Transactions"])
-
-    def show_custom_context_menu(self, button, menu_items):
-
-        menu = QMenu(self)
-
-        # set style for the menu
-        menu.setStyleSheet("""
-                        QMenu{
-                            background-color: #0192ef;
-                            color: #0e0d6a;
-                            /*border: 1px solid #0e0d6a;*/
-                            /*border-radius:15px;*/
-                            }
-                        QMenu:selected{
-                            background-color: #52452a;
-                            color: #fec701;
-                            }    
-
-                        """)
-
-        # add actions to the menu
-        for item_text in menu_items:
-            action = QAction(item_text, self)
-            action.triggered.connect(self.handle_menu_item_click)
-            menu.addAction(action)
-
-        # show the menu
-        menu.move(button.mapToGlobal(button.rect().topRight()))
-        menu.exec()
-
-    def handle_menu_item_click(self):
-        text = self.sender().text()
-
-        if text == "Students Information":
-            self.switch_to_studentsInformation()
-        elif text == "Students Payments":
-            self.switch_to_studentsPayments()
-        elif text == "Students Transactions":
-            self.switch_to_studentsTransactions()
-
-
-    #Open dialog for inserting new students
     def open_addStudent_dialog(self):
-        from StudentDialog import Ui_StudentsDialog
-        #instantiate and show the dialog
+        #from StudentDialog import Ui_StudentsDialog
+        # instantiate and show the dialog
         addStudent_dialog = Ui_StudentsDialog(self)
-        result = addStudent_dialog.exec() #This will block until the dialog is closed
 
-        if result == Ui_StudentsDialog.accepted:
-            #if the dialog was accepted (user clicked add student button)
-            pass
+        # Connect the clicked signal of the "Save" button to the uiAddStu method
+        addStudent_dialog.saveStudent_Button.clicked.connect(lambda: self.uiAddStu(addStudent_dialog))
+
+        result = addStudent_dialog.exec()  # This will block until the dialog is closed
 
 
 
-# class DoubleButtonWidgetStudents(QWidget):
-#     def __init__(self, row_index, row_data):
-#         super().__init__()
-#
-#         #store the row index and row data as an instance in variables
-#         self.row_index = row_index
-#         self.row_data = row_data
-#
-#         #get student variables from the tuple
-#         self.student_name = self.row_data[0]
-#         self.student_id = self.row_data[1]
-#
-#         layout = QHBoxLayout(self)
-#
-#         #create display video button
-#         self.display_video_btn = QPushButton("", self)
-#         self.display_video_btn.setStyleSheet("background-color : #fec701")
-#         self.display_video_btn.setFixedSize(61, 31)
-#
-#         #set icon for the button
-#         icon = QIcon(":/Icons/ad-blocker (2).png")
-#         self.display_video_btn.setIcon(icon)
-#
-#         layout .addWidget(self.display_video_btn)
-
+    def uiAddStu(self, addStudent_dialog):
+        name = addStudent_dialog.name_lineEdit.text()
+        gender = addStudent_dialog.gender_comboBox.currentText()
+        class_ = addStudent_dialog.class_comboBox.currentText()
+        dob = addStudent_dialog.dob_dateEdit.date().toString(Qt.ISODate)
+        address = addStudent_dialog.address_lineEdit.text()
+        phone = addStudent_dialog.phone_lineEdit.text()
+        email = addStudent_dialog.email_lineEdit.text()
+        print(dob)
+        #print(f"Email: {email}")
+        #print(gender)
+        import SQLServerDoWork
+        SQLServerDoWork.AddStudent("Id", name, gender, class_, dob,"Age" , address, phone, email)

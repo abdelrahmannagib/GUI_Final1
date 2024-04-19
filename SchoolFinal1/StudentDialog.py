@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QDialog,
     QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_StudentsDialog(QDialog):
-    def __init__(self, parent=None):
+    def __init__(self,parent=None):
         super().__init__(parent)
         self.resize(545, 584)
         self.setStyleSheet(u"QDialog{\n"
@@ -331,7 +331,7 @@ class Ui_StudentsDialog(QDialog):
     # setupUi
 
     def retranslateUi(self, StudentsDialog):
-        StudentsDialog.setWindowTitle(QCoreApplication.translate("StudentsDialog", u"Students Dialog", None))
+        StudentsDialog.setWindowTitle(QCoreApplication.translate("StudentsDialog", u"Dialog", None))
         self.label.setText(QCoreApplication.translate("StudentsDialog", u"Add New Student", None))
         self.uploadPhoto_Button.setText(QCoreApplication.translate("StudentsDialog", u"Upload Photo", None))
         self.takePhoto_Button.setText(QCoreApplication.translate("StudentsDialog", u"Take Photo", None))

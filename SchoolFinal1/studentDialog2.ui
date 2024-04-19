@@ -75,76 +75,6 @@ QLabel{
     <string>Add New Student</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>450</y>
-     <width>441</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QPushButton" name="uploadPhoto_Button">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton{
-	background-color: rgb(1, 146, 239);
-	color: #ffffff;
-	border-radius: 5px;
-	border: none;
-	font-weight: bold;
-	font-size: 15px;
-}</string>
-      </property>
-      <property name="text">
-       <string>Upload Photo</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="takePhoto_Button">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>30</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton{
-	background-color: rgb(1, 146, 239);
-	color: #ffffff;
-	border-radius: 5px;
-	border: none;
-	font-weight: bold;
-	font-size: 15px;
-}</string>
-      </property>
-      <property name="text">
-       <string>Take Photo</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
@@ -159,15 +89,204 @@ QLabel{
    </property>
   </widget>
   <widget class="QWidget" name="">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Gender</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="gender_comboBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>Male</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Female</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Class</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="class_comboBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>Kindergarten (KG) 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Kindergarten (KG) 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 10</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Grade 12</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Date Of Birth</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dob_dateEdit">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>21</x>
      <y>70</y>
-     <width>511</width>
-     <height>371</height>
+     <width>501</width>
+     <height>64</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_9">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -204,229 +323,87 @@ QLabel{
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_9">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Gender</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="gender_comboBox">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>30</height>
-           </size>
-          </property>
-          <item>
-           <property name="text">
-            <string>Male</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Female</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLabel" name="label_10">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Student ID</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QLabel" name="label_7">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Class</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="class_comboBox">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>30</height>
-           </size>
-          </property>
-          <item>
-           <property name="text">
-            <string>Kindergarten (KG) 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Kindergarten (KG) 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 7</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 8</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 9</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 10</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 11</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Grade 12</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
-        <item>
-         <widget class="QLabel" name="label_8">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Date Of Birth</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="dob_dateEdit">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>30</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <item>
-         <widget class="QLabel" name="label_9">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Admission Date</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDateEdit" name="admission_dateEdit">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>30</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="name_lineEdit_2">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>35</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_10">
+      <item>
+       <widget class="QLabel" name="label_11">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Age</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="name_lineEdit_3">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>35</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>21</x>
+     <y>221</y>
+     <width>501</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_8">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
@@ -531,9 +508,9 @@ QLabel{
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>520</y>
-     <width>211</width>
+     <x>140</x>
+     <y>450</y>
+     <width>271</width>
      <height>37</height>
     </rect>
    </property>
