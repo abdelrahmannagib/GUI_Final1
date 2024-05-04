@@ -93,16 +93,16 @@ def DetectYacta():
             pygame.mixer.quit()
             Copy_Video.copy_video_to_folder(video_file_path,output_directory_vio,f"{current_datetime}.mp4",current_datetime)
 
-        else:
-            pygame.mixer.init()
-            pygame.mixer.music.load("NonVio.mp3")
-            pygame.mixer.music.play()
-            # Wait until the music finishes playing
-            while pygame.mixer.music.get_busy():
-                pygame.time.Clock().tick(20)  # Adjust the number as needed
-
-            # Clean up the mixer when finished
-            pygame.mixer.quit()
+        #else:
+            # pygame.mixer.init()
+            # pygame.mixer.music.load("NonVio.mp3")
+            # pygame.mixer.music.play()
+            # # Wait until the music finishes playing
+            # while pygame.mixer.music.get_busy():
+            #     pygame.time.Clock().tick(20)  # Adjust the number as needed
+            #
+            # # Clean up the mixer when finished
+            # pygame.mixer.quit()
 
             #playsound('E:/كلية/iot/Testtt/20_3_Try/NonVio.wav')
 
@@ -114,7 +114,7 @@ def DetectYacta():
 
 
     # Initialize the camera
-    #url= 'http://192.168.167.48:8080/video'
+    #url= 'http://192.168.1.159:8080/video'
     #cap = cv2.VideoCapture(url)
     cap = cv2.VideoCapture(0)
 
@@ -139,9 +139,8 @@ def DetectYacta():
             out = cv2.VideoWriter(output_filename, fourcc, 20.0, (640, 480))  # Adjust width and height if needed
 
             # Capture and write frames for 3 seconds
-            while (time.time() - start_time) < 3:
+            while (time.time() - start_time) < 5:
                 ret, frame = cap.read()
-
                 if not ret:
                     print("Failed to capture frame.")
                     break
@@ -159,7 +158,7 @@ def DetectYacta():
                 break
             # Process the video file through your model
             start_time_model = time.time()
-            #output_filename=r"my_videos/11(2).mp4"
+            #output_filename=r"my_videos/2024-04-16 12_45_09.mp4"
 
             predict_video(output_filename)
             end_time_model = time.time()
@@ -178,4 +177,4 @@ def DetectYacta():
 
 
 
-
+#DetectYacta()

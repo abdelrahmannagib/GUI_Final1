@@ -156,7 +156,7 @@ def FaceYacta():
         if not ret:
             break
 
-        time.sleep(1)
+        time.sleep(0.2)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
         print(len(faces))
@@ -294,3 +294,4 @@ def FaceYacta():
     cap.release()
     cv2.destroyAllWindows()
 
+#FaceYacta()

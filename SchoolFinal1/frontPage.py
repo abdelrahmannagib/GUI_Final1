@@ -2,10 +2,11 @@ import cv2
 from PySide6.QtGui import QAction, QIcon
 from PySide6.QtWidgets import QMainWindow, QApplication, QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, \
     QTableWidget, \
-    QTableWidgetItem, QRadioButton, QCheckBox, QLabel, QHeaderView, QSizePolicy, QScrollArea, QStyledItemDelegate
+    QTableWidgetItem, QRadioButton, QCheckBox, QLabel, QHeaderView, QSizePolicy, QScrollArea, QStyledItemDelegate, \
+    QMessageBox
 # from PyQt6  QApplication,  QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QTableWidget, \
 #     QTableWidgetItem, QRadioButton
-from ui_Final5 import Ui_MainWindow
+from ui_Final7 import Ui_MainWindow
 from ViolenceRealTime import *
 from ViolenceRealTime import DetectYacta
 from PySide6.QtCore import Qt, QSize
@@ -303,8 +304,6 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
         result = addStudent_dialog.exec()  # This will block until the dialog is closed
 
-
-
     def uiAddStu(self, addStudent_dialog):
         name = addStudent_dialog.name_lineEdit.text()
         gender = addStudent_dialog.gender_comboBox.currentText()
@@ -313,11 +312,16 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         address = addStudent_dialog.address_lineEdit.text()
         phone = addStudent_dialog.phone_lineEdit.text()
         email = addStudent_dialog.email_lineEdit.text()
-        id=addStudent_dialog.name_lineEdit_2.text()
-        Age=addStudent_dialog.name_lineEdit_3.text()
-        #print(dob)
-        #print(f"Email: {email}")
-        #print(gender)
+        id = addStudent_dialog.name_lineEdit_2.text()
+        Age = addStudent_dialog.name_lineEdit_3.text()
+
+        # Perform validation
+        if not name or not gender or not class_ or not dob or not address or not phone or not email:
+            # Display message indicating invalid input
+            QMessageBox.warning(self, "Invalid Input", "Please fill in all fields.")
+            return
+
+        # Proceed with saving the student data
         import SQLServerDoWork
-        SQLServerDoWork.AddStudent(id, name, gender, class_, dob,Age, address, phone, email)
+        SQLServerDoWork.AddStudent(id, name, gender, class_, dob, Age, address, phone, email)
         self.loadData()
