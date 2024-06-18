@@ -40,6 +40,5 @@ def copy_video_to_folder(video_path, destination_folder, new_filename,time):
 # copy_video_to_folder(source_video_path, destination_folder, new_filename)
 
 
-def copy_photo_to_folder(id,photopath,name):
-    print("yalla ya negm")
+
     

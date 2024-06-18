@@ -8,12 +8,12 @@ from PySide6.QtWidgets import QMainWindow, QApplication, QMenu, QWidget, QHBoxLa
     QMessageBox
 # from PyQt6  QApplication,  QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, QTableWidget, \
 #     QTableWidgetItem, QRadioButton
-from ui_Final7 import Ui_MainWindow
+from ui_June1 import Ui_MainWindow
 from ViolenceRealTime import *
 from ViolenceRealTime import DetectYacta
 from PySide6.QtCore import Qt, QSize
 from Display_Video import Display_Video
-from StudentDialog import Ui_StudentsDialog
+from StudentDialogJune1 import Ui_StudentsDialog
 
 
 class ActionsWidget(QWidget):
@@ -206,7 +206,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
         # Populate the table with student information
         for row, video in enumerate(violence_videos):
-            self.violence_reoprts_table.setItem(row, 0, QTableWidgetItem(str(video[0])))
+            self.violence_reoprts_table.setItem(row, 0, QTableWidgetItem(str(video[1])))
             self.violence_reoprts_table.setItem(row, 1, QTableWidgetItem(str(video[1])))
 
             # Create radio button for each row
@@ -319,7 +319,12 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         # Connect the clicked signal of the "Save" button to the uiAddStu method
         addStudent_dialog.saveStudent_Button.clicked.connect(lambda: self.uiAddStu(addStudent_dialog))
 
+        addStudent_dialog.TakePhotobtn.clicked.connect(lambda: self.OnClickAddFromCamera(addStudent_dialog))
+
+        addStudent_dialog.uploadPhotobtn.clicked.connect(lambda: self.UploadFromPC(addStudent_dialog))
+
         result = addStudent_dialog.exec()  # This will block until the dialog is closed
+
 
     def uiAddStu(self, addStudent_dialog):
         name = addStudent_dialog.name_lineEdit.text()
@@ -345,15 +350,34 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
 
 
-    def OnClickAddFromCamera(self,addStudent_dialog):
+    def OnClickAddFromCamera(self,TakePhoto):
         import Add_photo_from_camrea
-        id = addStudent_dialog.name_lineEdit_2.text()
-        name = addStudent_dialog.name_lineEdit.text()
-        self.create_folder(f'CameraPhotos/{name}')
-        for i in range(1, 6):
-            Add_photo_from_camrea.open_camera(id,i,name)
+        id = TakePhoto.name_lineEdit_2.text()
+        name = TakePhoto.name_lineEdit.text()
+        if not name or not id :
+            # Display message indicating invalid input
+            QMessageBox.warning(self, "Invalid Input", "Please fill in all fields.")
+            return
+        FolderName= f'CameraPhotos/{name}'
+        #print(FolderName)
+        self.create_folder(FolderName)
+        Add_photo_from_camrea.open_camera(id,0,name)
 
-    def create_folder(path):
+    def UploadFromPC(self, TakePhoto):
+        import Add_photo_static
+        id = TakePhoto.name_lineEdit_2.text()
+        name = TakePhoto.name_lineEdit.text()
+        if not name or not id:
+            # Display message indicating invalid input
+            QMessageBox.warning(self, "Invalid Input", "Please fill in all fields.")
+            return
+        FolderName = f'CameraPhotos/{name}'
+        # print(FolderName)
+        self.create_folder(FolderName)
+        for i in range(1,6):
+            Add_photo_static.select_and_save_image(FolderName,i,id)
+
+    def create_folder(self,path):
         try:
             # Create the directory, including any necessary intermediate directories
             os.makedirs(path, exist_ok=True)

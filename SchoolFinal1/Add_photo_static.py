@@ -1,9 +1,9 @@
+import os
+import shutil
 import tkinter as tk
 from tkinter import filedialog
-import shutil
-import os
 
-def select_and_save_image(destination_folder):
+def select_and_save_image(destination_folder, iteration, id):
     # Create a root window and hide it
     root = tk.Tk()
     root.withdraw()
@@ -16,23 +16,25 @@ def select_and_save_image(destination_folder):
 
     # Check if a file was selected
     if file_path:
-        # Get the filename
-        file_name = os.path.basename(file_path)
+        # Get the file extension
+        _, file_extension = os.path.splitext(file_path)
+
+        # Create the new filename
+        new_file_name = f"Photo{iteration}_{id}{file_extension}"
 
         # Ensure the destination folder exists
         if not os.path.exists(destination_folder):
             os.makedirs(destination_folder)
 
         # Create the destination path
-        destination_path = os.path.join(destination_folder, file_name)
+        destination_path = os.path.join(destination_folder, new_file_name)
 
-        # Copy the selected image to the destination folder
+        # Copy the selected image to the destination folder with the new name
         shutil.copy(file_path, destination_path)
 
         print(f"Image saved to {destination_path}")
     else:
         print("No file selected")
 
-# Example usage
-destination_folder = "CameraPhotos"
-select_and_save_image(destination_folder)
+# Example usage:
+# select_and_save_image("CameraPhotos/JohnDoe", 1, "12345")
