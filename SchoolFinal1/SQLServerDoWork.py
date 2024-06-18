@@ -47,7 +47,7 @@ def showStudeentStatus(date):
     SQL_QUERY = """
         SELECT s.id,s.name, sa.date,s.StClass
         FROM Students AS s
-        LEFT JOIN Student_Attendance AS sa ON sa.id = s.id AND CAST(sa.date AS DATE) = ?
+        LEFT JOIN Student_Attendance AS sa ON sa.id = s.id AND CAST(sa.date AS DATE) = ? 
         ORDER BY s.id;
         """
     cursor = conn.cursor()
@@ -93,7 +93,7 @@ def diplayAllStudents():
     x = []
     for r in records:
         # print("ds")
-        x.append((r.id, r.name, r.Gender,r.StClass,r.Birthdate,r.Age,r.Address,r.phone,r.email))
+        x.append((r.id, r.name, r.Gender,r.StClass,r.Birthdate,r.Age,r.Address,r.phone,r.email,r.AdmissionDate))
         # print(f"{r.Id} {r.Date} {r.path}")
         # Display_Video.Display_Video(r.path)
     cursor.close()
@@ -110,12 +110,13 @@ def AddStudent(id,name,gender,stClass,DOB,Age,Addr,Phone,email):
     conn = pyodbc.connect(connection_string)
     SQL_QUERY = """
        INSERT INTO Students 
-       VALUES (?,?,? ,?,?,? ,?,?,?)
+       VALUES (?,?,? ,?,?,? ,?,?,?,?)
        """
 
     cursor = conn.cursor()
+    current_datetime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     #print(id)
-    cursor.execute(SQL_QUERY, (int(id), name,gender,stClass,DOB,int(Age),Addr,Phone,email))
+    cursor.execute(SQL_QUERY, (int(id), name,gender,stClass,DOB,int(Age),Addr,Phone,email,current_datetime))
     conn.commit()
     cursor.close()
 
@@ -136,4 +137,4 @@ def AddStudentAttendance(ids,times):
 
 #AddStudent(223,"name","gender","stClass","4/18/2024",5,"Addr","Phone","email")
 
-diplayAllStudents()
+#diplayAllStudents()

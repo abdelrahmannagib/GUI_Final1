@@ -38,3 +38,8 @@ def copy_video_to_folder(video_path, destination_folder, new_filename,time):
 # destination_folder = "Violence_Incidences"
 # new_filename = "2024-04-14 20:46:55.mp4"
 # copy_video_to_folder(source_video_path, destination_folder, new_filename)
+
+
+def copy_photo_to_folder(id,photopath,name):
+    print("yalla ya negm")
+    

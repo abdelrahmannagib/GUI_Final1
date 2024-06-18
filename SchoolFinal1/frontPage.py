@@ -1,3 +1,5 @@
+import os
+
 import cv2
 from PySide6.QtGui import QAction, QIcon
 from PySide6.QtWidgets import QMainWindow, QApplication, QMenu, QWidget, QHBoxLayout, QVBoxLayout, QPushButton, \
@@ -244,7 +246,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
         # Set the number of rows in the table to match the number of students
         self.studentInfo_table_2.setRowCount(len(attendance_Deafult_Date))
-        self.studentInfo_table_2.setColumnCount(4)
+        self.studentInfo_table_2.setColumnCount(5)
 
         #self.selected_video_path = None
 
@@ -255,6 +257,15 @@ class MySideBar(QMainWindow, Ui_MainWindow):
             self.studentInfo_table_2.setItem(row, 1, QTableWidgetItem(str(video[1])))
             self.studentInfo_table_2.setItem(row, 2, QTableWidgetItem(str(video[2])))
             self.studentInfo_table_2.setItem(row, 3, QTableWidgetItem(str(video[3])))
+            Attendstatus="Attend"
+            if video[2] != "None":
+                Attendstatus = "Attend"
+            else:
+                Attendstatus = "Absent"
+            self.studentInfo_table_2.setItem(row, 4, QTableWidgetItem(Attendstatus))
+
+
+
             #self.studentInfo_table_2.setItem(row, 4, QTableWidgetItem(str("hi")))
 
     def filterTableByDateAttendance(self, selected_date):
@@ -267,7 +278,7 @@ class MySideBar(QMainWindow, Ui_MainWindow):
 
         # Set the number of rows in the table to match the number of students
         self.studentInfo_table_2.setRowCount(len(attendance_Deafult_Date))
-        self.studentInfo_table_2.setColumnCount(4)
+        self.studentInfo_table_2.setColumnCount(5)
 
         # self.selected_video_path = None
 
@@ -278,6 +289,12 @@ class MySideBar(QMainWindow, Ui_MainWindow):
             self.studentInfo_table_2.setItem(row, 1, QTableWidgetItem(str(video[1])))
             self.studentInfo_table_2.setItem(row, 2, QTableWidgetItem(str(video[2])))
             self.studentInfo_table_2.setItem(row, 3, QTableWidgetItem(str(video[3])))
+            Attendstatus = "Attend"
+            if str(video[2]) != "None":
+                Attendstatus = "Attend"
+            else:
+                Attendstatus = "Absent"
+            self.studentInfo_table_2.setItem(row, 4, QTableWidgetItem(Attendstatus))
 
     def switch_to_attendanceMonitoring(self):
         self.stackedWidget.setCurrentIndex(3)
@@ -325,3 +342,22 @@ class MySideBar(QMainWindow, Ui_MainWindow):
         import SQLServerDoWork
         SQLServerDoWork.AddStudent(id, name, gender, class_, dob, Age, address, phone, email)
         self.loadData()
+
+
+
+    def OnClickAddFromCamera(self,addStudent_dialog):
+        import Add_photo_from_camrea
+        id = addStudent_dialog.name_lineEdit_2.text()
+        name = addStudent_dialog.name_lineEdit.text()
+        self.create_folder(f'CameraPhotos/{name}')
+        for i in range(1, 6):
+            Add_photo_from_camrea.open_camera(id,i,name)
+
+    def create_folder(path):
+        try:
+            # Create the directory, including any necessary intermediate directories
+            os.makedirs(path, exist_ok=True)
+            print(f"Folder '{path}' created successfully.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
