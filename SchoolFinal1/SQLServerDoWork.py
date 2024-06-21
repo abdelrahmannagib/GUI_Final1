@@ -61,6 +61,8 @@ def showStudeentStatus(date):
     return x
 
 
+
+
 # z=showStudeentStatus("2024-04-14")
 # for var in z:
 #     print(var[0],var[1],var[2],var[3])
@@ -135,6 +137,29 @@ def AddStudentAttendance(ids,times):
     conn.commit()
     cursor.close()
 
-#AddStudent(223,"name","gender","stClass","4/18/2024",5,"Addr","Phone","email")
+def findStudentsById(ids):
+    conn = pyodbc.connect(connection_string)
+    # Build the parameter placeholders for the IN clause
+    #ids = [str(id).rstrip('.') for id in ids]
 
+    placeholders = ','.join('?' for _ in ids)
+
+    SQL_QUERY = f"""
+           SELECT s.id, s.name
+           FROM Students AS s
+           WHERE s.id IN ({placeholders})
+       """
+
+    with pyodbc.connect(connection_string) as conn:
+        with conn.cursor() as cursor:
+            cursor.execute(SQL_QUERY, ids)
+            records = cursor.fetchall()
+            result = [(r.id, r.name) for r in records]
+
+    #print(result)
+    return result
+
+#findStudentsById(['449','901'])
+#AddStudent(223,"name","gender","stClass","4/18/2024",5,"Addr","Phone","email")
 #diplayAllStudents()
+#findStudentsById([449,312])
